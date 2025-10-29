@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TriggerHive 🐝
 
-## Getting Started
+> A modern workflow automation platform currently under development
 
-First, run the development server:
+![Status](https://img.shields.io/badge/Status-Work%20in%20Progress-orange?style=flat-square) ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 About This Project
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I'm building **TriggerHive** - an open-source workflow automation platform similar to [n8n](https://n8n.io/) and [Zapier](https://zapier.com/). This project is currently in active development.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📚 Learning Journey
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This implementation is part of my learning process, focusing on:
 
-## Learn More
+- ✨ Visual workflow builder with drag-and-drop interface
+- 🔗 Multi-service integrations (AI, messaging, webhooks)
+- 🛠 Full-stack TypeScript with modern development practices
+- 💳 SaaS business layer including authentication and payments
+- 🏭 Production-ready architecture with background jobs and error tracking
 
-To learn more about Next.js, take a look at the following resources:
+## � Production Ready
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 🐛 **Error Tracking** - Comprehensive monitoring with Sentry + AI insights
+- 🧑‍💻 **Code Quality** - AI-powered PR reviews with CodeRabbit
+- 🗄️ **Scalable Database** - Prisma ORM with Neon Postgres
+- 🎨 **Modern UI** - Beautiful, responsive interface with React Flow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠 Tech Stack Planned
 
-## Deploy on Vercel
+### Frontend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework:** Next.js 16 with App Router
+- **UI Library:** React
+- **Language:** TypeScript
+- **Workflow Canvas:** React Flow
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Backend
+
+- **API:** tRPC + Next.js API Routes
+- **Language:** TypeScript
+
+### Infrastructure
+
+- **Database:** PostgreSQL with Prisma ORM, hosted on Neon
+- **Authentication:** Better Auth
+- **Payments:** Polar subscriptions
+- **Background Jobs:** Inngest
+- **Workflow Canvas:** React Flow
+- **Error Tracking:** Sentry
+- **Code Reviews:** CodeRabbit
+- **Deployment:** Vercel
+
+## 🗓 Current Status
+
+### Phase 1: Project Setup ✅
+
+- ✅ Repository initialization
+- ✅ Basic project structure
+- ✅ Development environment setup
+- ✅ Initial configuration
+
+### Phase 2: Core Foundation 🔄
+
+- 🔄 Database setup (tRPC)
+- 🔄 Authentication setup
+- 🔄 Basic UI for Auth page
+
+## 🏗 Getting Started
+
+Setup instructions will be added as the project develops. Stay tuned!
+
+## 🤝 Contributing
+
+This is currently a personal learning project. I'm not accepting contributions at this time, but feel free to **fork** and build your own version!
+
+---
+
+> This README will be updated as the project progresses. Check back soon for development updates!
+
+**TriggerHive** - Building the future of workflow automation 🐝
+
+Last updated: October 29, 2025
