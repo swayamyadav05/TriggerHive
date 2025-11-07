@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { polarClient } from "@/lib/polar";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { headers } from "next/headers";
 import { cache } from "react";
@@ -36,5 +37,34 @@ export const protectedProcedure = baseProcedure.use(
     }
 
     return next({ ctx: { ...ctx, auth: session } });
+  }
+);
+export const premiumProcedure = protectedProcedure.use(
+  async ({ ctx, next }) => {
+    let customer;
+    
+    try {
+      customer = await polarClient.customers.getStateExternal({
+        externalId: ctx.auth.user.id,
+      });
+    } catch (error) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Failed to verify subscription status",
+        cause: error,
+      });
+    }
+
+    if (
+      !customer.activeSubscriptions ||
+      customer.activeSubscriptions.length === 0
+    ) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "This feature requires an active subscription. Please upgrade to continue.",
+      });
+    }
+
+    return next({ ctx: { ...ctx, customer } });
   }
 );
