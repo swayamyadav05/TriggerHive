@@ -41,9 +41,19 @@ export const protectedProcedure = baseProcedure.use(
 );
 export const premiumProcedure = protectedProcedure.use(
   async ({ ctx, next }) => {
-    const customer = await polarClient.customers.getStateExternal({
-      externalId: ctx.auth.user.id,
-    });
+    let customer;
+    
+    try {
+      customer = await polarClient.customers.getStateExternal({
+        externalId: ctx.auth.user.id,
+      });
+    } catch (error) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Failed to verify subscription status",
+        cause: error,
+      });
+    }
 
     if (
       !customer.activeSubscriptions ||
@@ -51,7 +61,7 @@ export const premiumProcedure = protectedProcedure.use(
     ) {
       throw new TRPCError({
         code: "FORBIDDEN",
-        message: "Active subscription required",
+        message: "This feature requires an active subscription. Please upgrade to continue.",
       });
     }
 
