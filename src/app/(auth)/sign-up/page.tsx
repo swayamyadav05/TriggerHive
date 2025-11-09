@@ -6,7 +6,7 @@ const Signup = async () => {
 
   return (
     <div>
-      <RegisterForm />;
+      <RegisterForm />
     </div>
   );
 };
