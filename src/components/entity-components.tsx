@@ -99,7 +99,7 @@ export const EntitySearch = ({
     <div className="relative ml-auto">
       <SearchIcon className="size-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
       <Input
-        className="max-x[200px] bg-background shadow-none border-border pl-8"
+        className="max-w-[200px] bg-background shadow-none border-border pl-8"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -129,7 +129,7 @@ export const EntityPagination = ({
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           disabled={page === 1 || disabled}
-          value={"outline"}
+          variant={"outline"}
           size={"sm"}
           onClick={() => {
             onPageChange(Math.max(1, page - 1));
@@ -140,7 +140,7 @@ export const EntityPagination = ({
           disabled={
             page === totalPages || totalPages === 0 || disabled
           }
-          value={"outline"}
+          variant={"outline"}
           size={"sm"}
           onClick={() => {
             onPageChange(Math.min(totalPages, page + 1));
