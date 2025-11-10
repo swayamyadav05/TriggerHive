@@ -166,7 +166,7 @@ export const WorkflowItem = ({ data }: { data: Workflow }) => {
       subtitle={
         <>
           Updated{" "}
-          {formatDistanceToNow(data.updatAt, { addSuffix: true })}{" "}
+          {formatDistanceToNow(data.updatedAt, { addSuffix: true })}{" "}
           &bull; Created{" "}
           {formatDistanceToNow(data.createdAt, { addSuffix: true })}
         </>
