@@ -3,6 +3,7 @@ import { polarClient } from "@/lib/polar";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { headers } from "next/headers";
 import { cache } from "react";
+import superjson from "superjson";
 export const createTRPCContext = cache(async () => {
   /**
    * @see: https://trpc.io/docs/server/context
@@ -17,7 +18,7 @@ const t = initTRPC.create({
   /**
    * @see https://trpc.io/docs/server/data-transformers
    */
-  // transformer: superjson,
+  transformer: superjson,
 });
 // Base router and procedure helpers
 export const createTRPCRouter = t.router;
@@ -42,7 +43,7 @@ export const protectedProcedure = baseProcedure.use(
 export const premiumProcedure = protectedProcedure.use(
   async ({ ctx, next }) => {
     let customer;
-    
+
     try {
       customer = await polarClient.customers.getStateExternal({
         externalId: ctx.auth.user.id,
@@ -61,7 +62,8 @@ export const premiumProcedure = protectedProcedure.use(
     ) {
       throw new TRPCError({
         code: "FORBIDDEN",
-        message: "This feature requires an active subscription. Please upgrade to continue.",
+        message:
+          "This feature requires an active subscription. Please upgrade to continue.",
       });
     }
 
