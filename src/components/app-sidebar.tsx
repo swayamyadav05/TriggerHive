@@ -65,7 +65,6 @@ export const AppSidebar = () => {
                 alt="Trigger Hive"
                 width={20}
                 height={20}
-                className="text-foreground"
               />
               <span className="font-semibold">TriggerHive</span>
             </Link>
