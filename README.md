@@ -54,27 +54,37 @@ This implementation is part of my learning process, focusing on:
 
 ### Project Setup
 
-- ✅ Repository initialization
-- ✅ Basic project structure
-- ✅ Development environment setup
-- ✅ Initial configuration
-- ✅ TypeScript + Next.js 16 with App Router configured
-- ✅ Prisma ORM integration with Neon PostgreSQL
-- ✅ ESLint and code quality tools
+- ✅ Repository initialization and basic project structure
+- ✅ TypeScript + Next.js 16 (App Router) configured
+- ✅ ESLint and code quality tooling
+- ✅ Prisma ORM integrated (client generated to `src/generated/prisma`)
 
 ### Core Foundation
 
-- ✅ Database setup with Prisma (PostgreSQL)
-- ✅ Authentication setup with Better Auth
-- ✅ User, Session, Account, and Verification models defined
-- ✅ tRPC API foundation
+- ✅ Database schema and migrations (Prisma) — workflow model and related migrations present
+- ✅ Authentication wired with Better Auth (email/password + Polar plugins)
+- ✅ Payments integration scaffolded with Polar (checkout & portal plugins configured)
+- ✅ tRPC API foundation with a `workflows` router (CRUD endpoints implemented)
 
-### AI & Workflow Execution
+### Workflows & Editor
 
-- ✅ Inngest integration for background jobs
-- ✅ AI model integrations (Google Gemini, OpenAI, Anthropic)
-- ✅ Multi-LLM support in workflow execution
-- ✅ Sentry error tracking and telemetry
+- ✅ Workflow model and CRUD APIs (create, list, get, update name, remove)
+- ✅ Basic editor scaffold that loads a workflow (`features/editor/components/editor.tsx`) — currently renders workflow JSON
+- ⚙️ Next: implement visual canvas (React Flow) and node execution UI
+
+### AI, Background Jobs & Observability
+
+- ✅ Inngest integration with an `execute` function demonstrating multi-LLM calls (Google Gemini, OpenAI, Anthropic)
+- ✅ Sentry integrated for error tracking and telemetry (server + client configs present)
+
+### UI & Developer Experience
+
+- ✅ UI component library and many primitives under `src/components/ui/` (inputs, dialogs, navigation, etc.)
+- ✅ tRPC client/server plumbing and auth context (`src/trpc/*`, `src/lib/auth.ts`)
+
+### Summary
+
+The core foundations are in place: database models, auth + payments wiring, a working workflows CRUD API, Inngest-based background execution examples, and a UI scaffold. The next focus is the visual workflow editor (React Flow canvas), execution engine wiring, and adding small end-to-end examples and getting-started docs.
 
 ## 🏗 Getting Started
 
@@ -90,4 +100,4 @@ This is currently a personal project. I'm not accepting contributions at this ti
 
 **TriggerHive** - Building the future of workflow automation 🐝
 
-Last updated: November 3, 2025
+Last updated: November 11, 2025
