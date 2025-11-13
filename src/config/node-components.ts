@@ -6,4 +6,4 @@ export const nodeComponents = {
   [NodeType.INITIAL]: InitialNode,
 } as const satisfies NodeTypes;
 
-export type RegisterdNodeType = keyof typeof nodeComponents;
+export type RegisteredNodeType = keyof typeof nodeComponents;
