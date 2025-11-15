@@ -24,7 +24,7 @@ export function WorkflowNode({
 }: WorkflowNodeProps) {
   return (
     <>
-      {showToolbar && (
+      {!showToolbar && (
         <NodeToolbar>
           <Button size={"sm"} variant={"ghost"} onClick={onSettings}>
             <SettingsIcon className="size-4" />
