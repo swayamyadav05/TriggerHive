@@ -122,7 +122,7 @@ export const useUpdateWorkflow = () => {
         );
       },
       onError: (error) => {
-        toast.error(`Failed to save workflow name: ${error.message}`);
+        toast.error(`Failed to save workflow: ${error.message}`);
       },
     })
   );

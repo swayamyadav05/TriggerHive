@@ -123,7 +123,7 @@ export const HttpRequestDialog = ({
                     </SelectContent>
                   </Select>
                   <FormDescription>
-                    The HTTP method to use this request
+                    The HTTP method to use for this request
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -142,7 +142,7 @@ export const HttpRequestDialog = ({
                     />
                   </FormControl>
                   <FormDescription>
-                    Static URL or use {"{{vairables}}"} for simple
+                    Static URL or use {"{{variables}}"} for simple
                     values or {"{{json variables}}"} to stringify
                     objects
                   </FormDescription>
