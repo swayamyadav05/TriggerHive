@@ -11,6 +11,7 @@ import { BaseExecutionNode } from "../base-execution-node";
 import { HttpResponseFormValues, HttpRequestDialog } from "./dialog";
 
 type HttpRequestNodeData = {
+  variableName?: string;
   endpoint?: string;
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
   body?: string;
