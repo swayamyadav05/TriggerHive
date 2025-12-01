@@ -14,6 +14,8 @@ import { CopyIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
 import { generateGoogleFormScript } from "./utils";
+import { useTRPC } from "@/trpc/client";
+import { useQuery } from "@tanstack/react-query";
 
 interface Props {
   open: boolean;
@@ -26,11 +28,15 @@ export const GoogleFormTriggerDialog = ({
 }: Props) => {
   const params = useParams();
   const workflowId = params.workflowId as string;
+  const trpc = useTRPC();
 
-  // Contruct the webhook URL
-  const baseUrl =
-    process.env.NEXT_PUBLIC_APP || "http://localhost:3000";
-  const webhookUrl = `${baseUrl}/api/webhooks/google-form?workflowId=${workflowId}`;
+  // Fetch webhook info including secret
+  const { data: webhookInfo, isLoading } = useQuery(
+    trpc.workflows.getWebhookInfo.queryOptions({ id: workflowId })
+  );
+
+  const webhookUrl = webhookInfo?.webhookUrl || "";
+  const webhookSecret = webhookInfo?.webhookSecret || "";
 
   const copyToClipboard = async () => {
     try {
@@ -65,8 +71,9 @@ export const GoogleFormTriggerDialog = ({
                 type="button"
                 size={"icon"}
                 variant={"outline"}
+                disabled={isLoading}
                 onClick={copyToClipboard}>
-                <CopyIcon size={4} />
+                <CopyIcon className="size-4" />
               </Button>
             </div>
           </div>
@@ -77,8 +84,11 @@ export const GoogleFormTriggerDialog = ({
             </h4>
             <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
               <li>Open your Google Form</li>
-              <li>Click the three dots menu &rarr; Script editor</li>
-              <li>Copy and past the script below</li>
+              <li>
+                Click the three dots menu &rarr; App Scripts &rarr;
+                Editor
+              </li>
+              <li>Copy and paste the script below</li>
               <li>Replace WEBHOOK_URL with your webhook URL above</li>
               <li>
                 Save and click &quot;Triggers&quot; &rarr; Add Trigger
@@ -96,8 +106,12 @@ export const GoogleFormTriggerDialog = ({
             <Button
               type="button"
               variant={"outline"}
+              disabled={isLoading || !webhookSecret}
               onClick={async () => {
-                const script = generateGoogleFormScript(webhookUrl);
+                const script = generateGoogleFormScript(
+                  webhookUrl,
+                  webhookSecret
+                );
 
                 try {
                   await navigator.clipboard.writeText(script);
@@ -110,8 +124,8 @@ export const GoogleFormTriggerDialog = ({
               Copy Google Apps Script
             </Button>
             <p className="text-xs text-muted-foreground">
-              This script includes your webhook URL and handles form
-              submissions
+              This script includes your webhook URL with
+              authentication and handles form submissions securely
             </p>
           </div>
 

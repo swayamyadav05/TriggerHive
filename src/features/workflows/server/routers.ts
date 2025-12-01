@@ -9,8 +9,8 @@ import { z } from "zod";
 import { PAGINATION } from "@/config/constants";
 import { NodeType } from "@/generated/prisma/enums";
 import { Edge, Node } from "@xyflow/react";
-import { inngest } from "@/inngest/client";
 import { sendWorkflowExecution } from "@/inngest/utils";
+import { generateWebhookSecret } from "@/lib/webhook-auth";
 
 export const workflowsRouter = createTRPCRouter({
   execute: protectedProcedure
@@ -33,6 +33,7 @@ export const workflowsRouter = createTRPCRouter({
     return prisma.workflow.create({
       data: {
         name: generateSlug(3),
+        webhookSecret: generateWebhookSecret(),
         userId: ctx.auth.user.id,
         nodes: {
           create: {
@@ -227,6 +228,50 @@ export const workflowsRouter = createTRPCRouter({
         totalPages,
         hasNextPage,
         hasPreviousPage,
+      };
+    }),
+  getWebhookInfo: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const workflow = await prisma.workflow.findUniqueOrThrow({
+        where: {
+          id: input.id,
+          userId: ctx.auth.user.id,
+        },
+        select: {
+          id: true,
+          webhookSecret: true,
+        },
+      });
+
+      const baseUrl =
+        process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+      const webhookUrl = `${baseUrl}/api/webhooks/google-form?workflowId=${workflow.id}`;
+
+      return {
+        webhookUrl,
+        webhookSecret: workflow.webhookSecret,
+        hasSecret: !!workflow.webhookSecret,
+      };
+    }),
+  regenerateWebhookSecret: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const workflow = await prisma.workflow.update({
+        where: {
+          id: input.id,
+          userId: ctx.auth.user.id,
+        },
+        data: {
+          webhookSecret: generateWebhookSecret(),
+        },
+        select: {
+          webhookSecret: true,
+        },
+      });
+
+      return {
+        webhookSecret: workflow.webhookSecret,
       };
     }),
 });

@@ -1,5 +1,6 @@
 export const generateGoogleFormScript = (
-  webhookUrl: string
+  webhookUrl: string,
+  webhookSecret: string
 ) => `function onFormSubmit(e) {
   var formResponse = e.response;
   var itemResponses = formResponse.getItemResponses();
@@ -21,18 +22,31 @@ export const generateGoogleFormScript = (
     responses: responses
   };
 
-  // Send to webhook
+  var payloadString = JSON.stringify(payload);
+  
+  // Generate HMAC-SHA256 signature
+  var WEBHOOK_SECRET = '${webhookSecret}';
+  var signature = Utilities.computeHmacSha256Signature(payloadString, WEBHOOK_SECRET);
+  var signatureHex = signature.map(function(byte) {
+    var hex = (byte < 0 ? byte + 256 : byte).toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  }).join('');
+
+  // Send to webhook with signature
+  var WEBHOOK_URL = '${webhookUrl}';
   var options = {
     'method': 'post',
     'contentType': 'application/json',
-    'payload': JSON.stringify(payload)
+    'headers': {
+      'x-webhook-signature': signatureHex
+    },
+    'payload': payloadString
   };
 
-  var WEBHOOK_URL = '${webhookUrl}';
-
   try {
-    UrlFetchApp.fetch(WEBHOOK_URL, options);
+    var response = UrlFetchApp.fetch(WEBHOOK_URL, options);
+    Logger.log('Webhook success: ' + response.getResponseCode());
   } catch(error) {
-    console.error('Webhook failed:', error);
+    Logger.log('Webhook failed: ' + error);
   }
 }`;
