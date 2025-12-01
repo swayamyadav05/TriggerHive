@@ -89,7 +89,10 @@ export const GoogleFormTriggerDialog = ({
                 Editor
               </li>
               <li>Copy and paste the script below</li>
-              <li>Replace WEBHOOK_URL with your webhook URL above</li>
+              <li>
+                The script includes your webhook URL and
+                authentication
+              </li>
               <li>
                 Save and click &quot;Triggers&quot; &rarr; Add Trigger
               </li>

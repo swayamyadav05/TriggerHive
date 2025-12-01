@@ -50,7 +50,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify webhook signature if secret is configured
+    // Handle signature verification if secret is configured
+    let body: unknown;
+
     if (workflow.webhookSecret) {
       const signature = request.headers.get("x-webhook-signature");
 
@@ -82,85 +84,49 @@ export async function POST(request: NextRequest) {
       }
 
       // Parse body after verification
-      const body = JSON.parse(rawBody);
-
-      // Validate payload with Zod schema
-      const validationResult =
-        googleFormPayloadSchema.safeParse(body);
-
-      if (!validationResult.success) {
-        return NextResponse.json(
-          {
-            success: false,
-            error: "Invalid payload format",
-            details: validationResult.error.issues.map((issue) => ({
-              field: issue.path.join("."),
-              message: issue.message,
-            })),
-          },
-          { status: 400 }
-        );
-      }
-
-      const validatedData = validationResult.data;
-
-      const formData = {
-        formId: validatedData.formId,
-        formTitle: validatedData.formTitle,
-        responseId: validatedData.responseId,
-        timestamp: validatedData.timestamp,
-        respondentEmail: validatedData.respondentEmail,
-        responses: validatedData.responses,
-        raw: body,
-      };
-
-      await sendWorkflowExecution({
-        workflowId,
-        initialData: {
-          googleForm: formData,
-        },
-      });
+      body = JSON.parse(rawBody);
     } else {
       // No webhook secret configured - read body normally
-      const body = await request.json();
-
-      // Validate payload with Zod schema
-      const validationResult =
-        googleFormPayloadSchema.safeParse(body);
-
-      if (!validationResult.success) {
-        return NextResponse.json(
-          {
-            success: false,
-            error: "Invalid payload format",
-            details: validationResult.error.issues.map((issue) => ({
-              field: issue.path.join("."),
-              message: issue.message,
-            })),
-          },
-          { status: 400 }
-        );
-      }
-
-      const validatedData = validationResult.data;
-
-      const formData = {
-        formId: validatedData.formId,
-        formTitle: validatedData.formTitle,
-        responseId: validatedData.responseId,
-        timestamp: validatedData.timestamp,
-        respondentEmail: validatedData.respondentEmail,
-        responses: validatedData.responses,
-        raw: body,
-      };
-
-      await sendWorkflowExecution({
-        workflowId,
-        initialData: {
-          googleForm: formData,
-        },
-      });
+      body = await request.json();
     }
+
+    // Validate payload with Zod schema
+    const validationResult = googleFormPayloadSchema.safeParse(body);
+
+    if (!validationResult.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid payload format",
+          details: validationResult.error.issues.map((issue) => ({
+            field: issue.path.join("."),
+            message: issue.message,
+          })),
+        },
+        { status: 400 }
+      );
+    }
+
+    const validatedData = validationResult.data;
+
+    // Build form data from validated payload
+    const formData = {
+      formId: validatedData.formId,
+      formTitle: validatedData.formTitle,
+      responseId: validatedData.responseId,
+      timestamp: validatedData.timestamp,
+      respondentEmail: validatedData.respondentEmail,
+      responses: validatedData.responses,
+      raw: body,
+    };
+
+    // Send workflow execution event
+    await sendWorkflowExecution({
+      workflowId,
+      initialData: {
+        googleForm: formData,
+      },
+    });
 
     return NextResponse.json({
       success: true,
