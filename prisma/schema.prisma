@@ -76,11 +76,12 @@ model Verification {
 }
 
 model Workflow {
-  id            String   @id @default(cuid())
-  name          String
-  webhookSecret String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                  String   @id @default(cuid())
+  name                String
+  webhookSecret       String?
+  stripeWebhookSecret String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
   nodes       Node[]
   connections Connection[]
@@ -94,6 +95,7 @@ enum NodeType {
   MANUAL_TRIGGER
   HTTP_REQUEST
   GOOGLE_FORM_TRIGGER
+  STRIPE_TRIGGER
 }
 
 model Node {

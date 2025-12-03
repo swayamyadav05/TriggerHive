@@ -231,7 +231,15 @@ export const workflowsRouter = createTRPCRouter({
       };
     }),
   getWebhookInfo: protectedProcedure
-    .input(z.object({ id: z.string() }))
+    .input(
+      z.object({
+        id: z.string(),
+        triggerType: z
+          .enum(["google-form", "stripe"])
+          .optional()
+          .default("google-form"),
+      })
+    )
     .query(async ({ ctx, input }) => {
       const workflow = await prisma.workflow.findUniqueOrThrow({
         where: {
@@ -241,17 +249,20 @@ export const workflowsRouter = createTRPCRouter({
         select: {
           id: true,
           webhookSecret: true,
+          stripeWebhookSecret: true,
         },
       });
 
       const baseUrl =
         process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-      const webhookUrl = `${baseUrl}/api/webhooks/google-form?workflowId=${workflow.id}`;
+      const webhookUrl = `${baseUrl}/api/webhooks/${input.triggerType}?workflowId=${workflow.id}`;
 
       return {
         webhookUrl,
         webhookSecret: workflow.webhookSecret,
+        stripeWebhookSecret: workflow.stripeWebhookSecret,
         hasSecret: !!workflow.webhookSecret,
+        hasStripeSecret: !!workflow.stripeWebhookSecret,
       };
     }),
   regenerateWebhookSecret: protectedProcedure
@@ -272,6 +283,37 @@ export const workflowsRouter = createTRPCRouter({
 
       return {
         webhookSecret: workflow.webhookSecret,
+      };
+    }),
+  saveStripeWebhookSecret: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        secret: z
+          .string()
+          .startsWith(
+            "whsec_",
+            "Invalid Stripe signing secret format"
+          ),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const workflow = await prisma.workflow.update({
+        where: {
+          id: input.id,
+          userId: ctx.auth.user.id,
+        },
+        data: {
+          stripeWebhookSecret: input.secret,
+        },
+        select: {
+          stripeWebhookSecret: true,
+        },
+      });
+
+      return {
+        stripeWebhookSecret: workflow.stripeWebhookSecret,
+        success: true,
       };
     }),
 });

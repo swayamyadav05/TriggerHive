@@ -128,10 +128,13 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json({
-      success: true,
-      message: "Webhook processed successfully",
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Webhook processed successfully",
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Google form webhook error: ", error);
     return NextResponse.json(

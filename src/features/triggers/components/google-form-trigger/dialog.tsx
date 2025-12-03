@@ -32,7 +32,10 @@ export const GoogleFormTriggerDialog = ({
 
   // Fetch webhook info including secret
   const { data: webhookInfo, isLoading } = useQuery(
-    trpc.workflows.getWebhookInfo.queryOptions({ id: workflowId })
+    trpc.workflows.getWebhookInfo.queryOptions({
+      id: workflowId,
+      triggerType: "google-form",
+    })
   );
 
   const webhookUrl = webhookInfo?.webhookUrl || "";
