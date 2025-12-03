@@ -69,26 +69,118 @@ This implementation is part of my learning process, focusing on:
 ### Workflows & Editor
 
 - ✅ Workflow model and CRUD APIs (create, list, get, update name, remove)
-- ✅ Basic editor scaffold that loads a workflow (`features/editor/components/editor.tsx`) — currently renders workflow JSON
-- ⚙️ Next: implement visual canvas (React Flow) and node execution UI
+- ✅ **Visual workflow editor with React Flow** - fully functional drag-and-drop canvas
+- ✅ **Node system** - Initial, Manual Trigger, HTTP Request nodes implemented
+- ✅ **Real-time execution** - Live workflow execution with Inngest integration
+- ✅ **Node connections** - Visual connection system with data flow
+- ✅ **Workflow execution tracking** - View execution history and results
+
+### Trigger Nodes & Webhooks
+
+- ✅ **Google Form Trigger** - Webhook integration with signature verification
+- ✅ **Stripe Trigger** - Native Stripe webhook integration with SDK verification
+- ✅ **Webhook Security** - HMAC-SHA256 signature verification system
+- ✅ **Webhook Management** - Auto-generated webhook URLs per workflow
+- ✅ **Real-time Updates** - Live workflow execution notifications via Inngest channels
 
 ### AI, Background Jobs & Observability
 
-- ✅ Inngest integration with an `execute` function demonstrating multi-LLM calls (Google Gemini, OpenAI, Anthropic)
+- ✅ Inngest integration with workflow execution engine
+- ✅ Multi-channel support (Google Form, Stripe triggers)
 - ✅ Sentry integrated for error tracking and telemetry (server + client configs present)
+- ✅ Execution history and logging
 
 ### UI & Developer Experience
 
 - ✅ UI component library and many primitives under `src/components/ui/` (inputs, dialogs, navigation, etc.)
 - ✅ tRPC client/server plumbing and auth context (`src/trpc/*`, `src/lib/auth.ts`)
+- ✅ **Node configuration dialogs** - Dynamic forms for each node type
+- ✅ **Workflow sidebar** - App navigation and workflow management
 
 ### Summary
 
-The core foundations are in place: database models, auth + payments wiring, a working workflows CRUD API, Inngest-based background execution examples, and a UI scaffold. The next focus is the visual workflow editor (React Flow canvas), execution engine wiring, and adding small end-to-end examples and getting-started docs.
+TriggerHive now has a fully functional visual workflow editor! Users can create workflows, connect nodes, configure triggers (Google Forms and Stripe), and execute them in real-time. The webhook system includes secure signature verification, and Inngest handles background execution with real-time updates. Next focus: expanding node types (email, Slack, more AI integrations) and improving execution monitoring.
+
+## ✨ Features
+
+### Visual Workflow Builder
+
+- Drag-and-drop node-based editor powered by React Flow
+- Real-time canvas updates and node connections
+- Custom node types with configurable parameters
+
+### Trigger Nodes
+
+- **Google Form Trigger** - Receive form submissions via webhooks
+- **Stripe Trigger** - Listen to Stripe payment events (payment_intent.succeeded, etc.)
+- **Manual Trigger** - Execute workflows on-demand
+
+### Action Nodes
+
+- **HTTP Request** - Make API calls to external services
+- More nodes coming soon (Email, Slack, AI, Database operations)
+
+### Webhook System
+
+- Auto-generated unique webhook URLs per workflow
+- Secure signature verification (HMAC-SHA256 for custom webhooks, Stripe SDK for Stripe)
+- Support for multiple trigger types per workflow
+
+### Execution Engine
+
+- Background job processing with Inngest
+- Real-time execution status updates
+- Execution history and logging
 
 ## 🏗 Getting Started
 
-Setup instructions will be added as the project develops. Stay tuned!
+### Prerequisites
+
+- Node.js 18+ and npm
+- PostgreSQL database (or use Neon)
+- Stripe account (for Stripe triggers)
+
+### Environment Variables
+
+Create a `.env` file with:
+
+```env
+DATABASE_URL="postgresql://..."
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+STRIPE_SECRET_KEY="sk_..."
+INNGEST_EVENT_KEY="..."
+INNGEST_SIGNING_KEY="..."
+SENTRY_AUTH_TOKEN="..."
+```
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/swayamyadav05/TriggerHive.git
+cd TriggerHive
+
+# Install dependencies
+npm install
+
+# Run database migrations
+npx prisma migrate dev
+
+# Start development server
+npm run dev
+```
+
+### Usage
+
+1. Sign up and create your first workflow
+2. Add trigger nodes (Google Form, Stripe, or Manual)
+3. Connect action nodes (HTTP Request, etc.)
+4. Configure each node with the required parameters
+5. For webhook triggers:
+   - Copy the generated webhook URL
+   - Configure it in the external service (Stripe Dashboard, Google Forms, etc.)
+   - Add the signing secret (for Stripe triggers)
+6. Execute your workflow and monitor the results!
 
 ## 🤝 Contributing
 
@@ -100,4 +192,4 @@ This is currently a personal project. I'm not accepting contributions at this ti
 
 **TriggerHive** - Building the future of workflow automation 🐝
 
-Last updated: November 11, 2025
+Last updated: December 4, 2025
