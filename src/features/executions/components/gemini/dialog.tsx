@@ -151,7 +151,7 @@ export const GeminiDialog = ({
                     </SelectContent>
                   </Select>
                   <FormDescription>
-                    The Google Gemini model use for completion
+                    The Google Gemini model used for completion
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -193,7 +193,7 @@ export const GeminiDialog = ({
                     />
                   </FormControl>
                   <FormDescription>
-                    The prompt to sent to the AI. Use{" "}
+                    The prompt to send to the AI. Use{" "}
                     {"{{variables}}"} for simple values or{" "}
                     {"{{json variable}}"} to stringify objects
                   </FormDescription>

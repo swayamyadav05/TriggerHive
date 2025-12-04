@@ -33,7 +33,6 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 
 export const AVAILABLE_MODELS = [
-  "claude-3-5-haiku-20241022",
   "claude-haiku-4-5",
   "claude-haiku-4-5-20251001",
   "claude-opus-4-0",
@@ -155,7 +154,7 @@ export const AnthropicDialog = ({
                     </SelectContent>
                   </Select>
                   <FormDescription>
-                    The Anthropic model use for completion
+                    The Anthropic model used for completion
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -197,7 +196,7 @@ export const AnthropicDialog = ({
                     />
                   </FormControl>
                   <FormDescription>
-                    The prompt to sent to the AI. Use{" "}
+                    The prompt to send to the AI. Use{" "}
                     {"{{variables}}"} for simple values or{" "}
                     {"{{json variable}}"} to stringify objects
                   </FormDescription>

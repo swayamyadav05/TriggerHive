@@ -156,7 +156,7 @@ export const OpenaiDialog = ({
                     </SelectContent>
                   </Select>
                   <FormDescription>
-                    The OpenAI model use for completion
+                    The OpenAI model used for completion
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -198,7 +198,7 @@ export const OpenaiDialog = ({
                     />
                   </FormControl>
                   <FormDescription>
-                    The prompt to sent to the AI. Use{" "}
+                    The prompt to send to the AI. Use{" "}
                     {"{{variables}}"} for simple values or{" "}
                     {"{{json variable}}"} to stringify objects
                   </FormDescription>
