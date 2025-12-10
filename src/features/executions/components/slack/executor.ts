@@ -4,13 +4,7 @@ import { decode } from "html-entities";
 import Handlebars from "handlebars";
 import ky from "ky";
 import { slackChannel } from "@/inngest/channels/slack";
-
-Handlebars.registerHelper("json", (context) => {
-  const jsonString = JSON.stringify(context, null, 2);
-  const safeString = new Handlebars.SafeString(jsonString);
-
-  return safeString;
-});
+import "@/lib/handlebars-helpers";
 
 type SlackNodeData = {
   variableName?: string;

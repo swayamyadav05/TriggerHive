@@ -5,13 +5,7 @@ import { createOpenAI } from "@ai-sdk/openai";
 import Handlebars from "handlebars";
 import { openaiChannel } from "@/inngest/channels/openai";
 import prisma from "@/lib/db";
-
-Handlebars.registerHelper("json", (context) => {
-  const jsonString = JSON.stringify(context, null, 2);
-  const safeString = new Handlebars.SafeString(jsonString);
-
-  return safeString;
-});
+import "@/lib/handlebars-helpers";
 
 type OpenaiNodeData = {
   variableName?: string;

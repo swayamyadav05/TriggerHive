@@ -148,13 +148,19 @@ export const GoogleFormTriggerDialog = ({
               </li>
               <li>
                 <code className="bg-background px-1 py-0.5 rounded">
-                  {"{{googleForm.responses['Question Name']}}"}
+                  {'{{response "Question Name"}}'}
                 </code>
-                - Specific answer
+                - Specific answer (recommended)
               </li>
               <li>
                 <code className="bg-background px-1 py-0.5 rounded">
-                  {"{{json.googleForm.responses}}"}
+                  {'{{get googleForm.responses "Question Name"}}'}
+                </code>
+                - Alternative syntax
+              </li>
+              <li>
+                <code className="bg-background px-1 py-0.5 rounded">
+                  {"{{json googleForm.responses}}"}
                 </code>
                 - All responses as JSON
               </li>
