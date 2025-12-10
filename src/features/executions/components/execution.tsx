@@ -133,7 +133,7 @@ export const ExecutionView = ({
             <p className="text-sm font-medium text-muted-foreground">
               Event ID
             </p>
-            <p className="text-sm">{execution.inngestEventId}s</p>
+            <p className="text-sm">{execution.inngestEventId}</p>
           </div>
         </div>
 

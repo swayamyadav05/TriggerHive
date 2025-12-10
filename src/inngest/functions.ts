@@ -106,7 +106,7 @@ export const executeWorkflow = inngest.createFunction(
 
     await step.run("update-execution", async () => {
       return prisma.execution.update({
-        where: { inngestEventId, workflowId },
+        where: { inngestEventId },
         data: {
           status: ExecutionStatus.SUCCESS,
           completedAt: new Date(),
