@@ -173,7 +173,7 @@ export const DiscordDialog = ({
                     <Input placeholder="Workflow Bot" {...field} />
                   </FormControl>
                   <FormDescription>
-                    Override the webhooks&apos;s default username
+                    Override the webhook&apos;s default username
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

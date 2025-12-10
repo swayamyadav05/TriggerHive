@@ -64,7 +64,7 @@ export const slackExecutor: NodeExecutor<SlackNodeData> = async ({
       }
       await ky.post(data.webhookUrl, {
         json: {
-          content: content.slice(0, 2000), // Slack's max message length
+          content: content,
           username,
         },
       });
@@ -83,7 +83,7 @@ export const slackExecutor: NodeExecutor<SlackNodeData> = async ({
       return {
         ...context,
         [data.variableName]: {
-          messageContent: content.slice(0, 2000),
+          messageContent: content,
         },
       };
     });

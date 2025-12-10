@@ -33,7 +33,10 @@ const formSchema = z.object({
       message:
         "Variable name must start with a letter, underscore, or $ and contain only letters, numbers, underscores, or $",
     }),
-  content: z.string().min(1, "Message content is required"),
+  content: z
+    .string()
+    .min(1, "Message content is required")
+    .max(40000, "Message content must be at most 40,000 characters"),
   webhookUrl: z.string().min(1, "Webhook URL is required"),
   // .refine() TODO JSONs
 });
@@ -109,7 +112,7 @@ export const SlackDialog = ({
                   </FormControl>
                   <FormDescription>
                     Use this name to reference the result in other
-                    nodes: {`{{${watchVariableName}.text}}`}
+                    nodes: {`{{${watchVariableName}.messageContent}}`}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
