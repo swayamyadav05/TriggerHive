@@ -70,10 +70,11 @@ This implementation is part of my learning process, focusing on:
 
 - ✅ Workflow model and CRUD APIs (create, list, get, update name, remove)
 - ✅ **Visual workflow editor with React Flow** - fully functional drag-and-drop canvas
-- ✅ **Node system** - Initial, Manual Trigger, HTTP Request nodes implemented
+- ✅ **Node system** - Multiple trigger and action nodes with configuration dialogs
 - ✅ **Real-time execution** - Live workflow execution with Inngest integration
 - ✅ **Node connections** - Visual connection system with data flow
-- ✅ **Workflow execution tracking** - View execution history and results
+- ✅ **Workflow execution tracking** - View execution history with detailed outputs
+- ✅ **Variable system** - Template-based variable interpolation (e.g., `{{nodeName.field}}`)
 
 ### Trigger Nodes & Webhooks
 
@@ -87,8 +88,11 @@ This implementation is part of my learning process, focusing on:
 
 - ✅ Inngest integration with workflow execution engine
 - ✅ Multi-channel support (Google Form, Stripe triggers)
+- ✅ **AI Integration** - OpenAI GPT-4, Anthropic Claude, Google Gemini nodes
+- ✅ **Messaging Integration** - Discord and Slack webhook support
+- ✅ **Credentials System** - Secure API key management for third-party services
 - ✅ Sentry integrated for error tracking and telemetry (server + client configs present)
-- ✅ Execution history and logging
+- ✅ Execution history with pagination, filtering, and detailed output views
 
 ### UI & Developer Experience
 
@@ -99,7 +103,7 @@ This implementation is part of my learning process, focusing on:
 
 ### Summary
 
-TriggerHive now has a fully functional visual workflow editor! Users can create workflows, connect nodes, configure triggers (Google Forms and Stripe), and execute them in real-time. The webhook system includes secure signature verification, and Inngest handles background execution with real-time updates. Next focus: expanding node types (email, Slack, more AI integrations) and improving execution monitoring.
+TriggerHive now has a comprehensive visual workflow automation platform! Users can create workflows with multiple trigger types (Google Forms, Stripe, Manual), connect them to action nodes (HTTP requests, AI models, messaging services), and execute them with real-time feedback. The platform includes secure credential management, detailed execution history, variable interpolation, and real-time status updates via WebSocket channels. Next focus: expanding integrations (email, databases, file storage), improving error handling, and adding workflow templates.
 
 ## ✨ Features
 
@@ -118,7 +122,8 @@ TriggerHive now has a fully functional visual workflow editor! Users can create 
 ### Action Nodes
 
 - **HTTP Request** - Make API calls to external services
-- More nodes coming soon (Email, Slack, AI, Database operations)
+- **AI Models** - Generate text with OpenAI, Anthropic Claude, or Google Gemini
+- **Messaging** - Send messages to Discord channels or Slack webhooks
 
 ### Webhook System
 
@@ -129,8 +134,16 @@ TriggerHive now has a fully functional visual workflow editor! Users can create 
 ### Execution Engine
 
 - Background job processing with Inngest
-- Real-time execution status updates
-- Execution history and logging
+- Real-time execution status updates via WebSocket channels
+- Execution history with detailed logs and output data
+- Variable interpolation system for dynamic data flow between nodes
+- Error handling and stack trace tracking
+
+### Credentials Management
+
+- Secure API key storage for third-party integrations
+- Support for OpenAI, Anthropic, and Google Gemini credentials
+- Per-user credential isolation
 
 ## 🏗 Getting Started
 
@@ -192,4 +205,4 @@ This is currently a personal project. I'm not accepting contributions at this ti
 
 **TriggerHive** - Building the future of workflow automation 🐝
 
-Last updated: December 4, 2025
+Last updated: December 10, 2025
