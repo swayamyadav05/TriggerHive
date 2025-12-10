@@ -225,8 +225,10 @@ export const OpenaiDialog = ({
                   </FormControl>
                   <FormDescription>
                     Sets the behaviour of the assistant. Use{" "}
-                    {"{{variables}}"} for simple values or{" "}
-                    {"{{json variable}}"} to stringify objects
+                    {"{{variables}}"} for simple values,{" "}
+                    {"{{json variable}}"} to stringify objects, or{" "}
+                    {'{{get obj "key name"}}'} for properties with
+                    spaces
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -247,8 +249,10 @@ export const OpenaiDialog = ({
                   </FormControl>
                   <FormDescription>
                     The prompt to send to the AI. Use{" "}
-                    {"{{variables}}"} for simple values or{" "}
-                    {"{{json variable}}"} to stringify objects
+                    {"{{variables}}"} for simple values,{" "}
+                    {"{{json variable}}"} to stringify objects, or{" "}
+                    {'{{get obj "key name"}}'} for properties with
+                    spaces
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

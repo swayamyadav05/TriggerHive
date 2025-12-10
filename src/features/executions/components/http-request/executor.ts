@@ -3,13 +3,7 @@ import { NonRetriableError } from "inngest";
 import ky, { type Options as KyOptions } from "ky";
 import Handlebars from "handlebars";
 import { httpRequestChannel } from "@/inngest/channels/http-request";
-
-Handlebars.registerHelper("json", (context) => {
-  const jsonString = JSON.stringify(context, null, 2);
-  const safeString = new Handlebars.SafeString(jsonString);
-
-  return safeString;
-});
+import "@/lib/handlebars-helpers";
 
 type HttpRequestNodeData = {
   variableName?: string;

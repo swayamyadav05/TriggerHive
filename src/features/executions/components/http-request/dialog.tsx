@@ -192,8 +192,10 @@ export const HttpRequestDialog = ({
                     </FormControl>
                     <FormDescription>
                       JSON with template variables. Use{" "}
-                      {"{{variables}}"} for simple values or{" "}
-                      {"{{json variable}}"} to stringify objects
+                      {"{{variables}}"} for simple values,{" "}
+                      {"{{json variable}}"} to stringify objects, or{" "}
+                      {'{{get obj "key name"}}'} for properties with
+                      spaces
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

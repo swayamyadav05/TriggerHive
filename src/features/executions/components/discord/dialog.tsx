@@ -156,8 +156,9 @@ export const DiscordDialog = ({
                   </FormControl>
                   <FormDescription>
                     The message to send. Use {"{{variables}}"} for
-                    simple values or {"{{json variable}}"} to
-                    stringify objects
+                    simple values, {"{{json variable}}"} to stringify
+                    objects, or {'{{get obj "key name"}}'} for
+                    properties with spaces
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

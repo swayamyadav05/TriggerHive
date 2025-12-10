@@ -5,13 +5,7 @@ import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import Handlebars from "handlebars";
 import { geminiChannel } from "@/inngest/channels/gemini";
 import prisma from "@/lib/db";
-
-Handlebars.registerHelper("json", (context) => {
-  const jsonString = JSON.stringify(context, null, 2);
-  const safeString = new Handlebars.SafeString(jsonString);
-
-  return safeString;
-});
+import "@/lib/handlebars-helpers";
 
 type GeminiNodeData = {
   variableName?: string;
