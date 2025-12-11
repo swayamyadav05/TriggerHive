@@ -6,6 +6,7 @@ import Handlebars from "handlebars";
 import { openaiChannel } from "@/inngest/channels/openai";
 import prisma from "@/lib/db";
 import "@/lib/handlebars-helpers";
+import { decrypt } from "@/lib/encryption";
 
 type OpenaiNodeData = {
   variableName?: string;
@@ -90,7 +91,7 @@ export const openaiExecutor: NodeExecutor<OpenaiNodeData> = async ({
   }
 
   const openai = createOpenAI({
-    apiKey: credential.value,
+    apiKey: decrypt(credential.value),
   });
 
   try {
