@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import Stripe from "stripe";
 import { decrypt } from "@/lib/encryption";
+import { CredentialType } from "@/generated/prisma/enums";
 
 export async function POST(request: NextRequest) {
   try {
@@ -45,8 +46,6 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       );
     }
-
-    import { CredentialType } from "@/generated/prisma/enums";
 
     // Get Stripe API secret key from credentials
     const stripeCredential = await prisma.credential.findFirst({
