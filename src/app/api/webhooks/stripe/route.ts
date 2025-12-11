@@ -46,11 +46,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    import { CredentialType } from "@/generated/prisma/enums";
+
     // Get Stripe API secret key from credentials
     const stripeCredential = await prisma.credential.findFirst({
       where: {
         userId: workflow.userId,
-        type: "STRIPE",
+        type: CredentialType.STRIPE,
       },
     });
 
