@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-import { NodeType } from "./src/generated/prisma/enums";
+import { NodeType } from "@/generated/prisma/enums";
 import { Separator } from "./ui/separator";
 import React, { useCallback } from "react";
 import Image from "next/image";
