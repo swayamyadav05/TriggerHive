@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "ngrok:dev": "dotenv -- cross-var ngrok http --url=$NGROK_URL 3000",
