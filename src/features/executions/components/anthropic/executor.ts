@@ -6,6 +6,7 @@ import Handlebars from "handlebars";
 import { anthropicChannel } from "@/inngest/channels/anthropic";
 import prisma from "@/lib/db";
 import "@/lib/handlebars-helpers";
+import { decrypt } from "@/lib/encryption";
 
 type AnthropicNodeData = {
   variableName?: string;
@@ -89,7 +90,7 @@ export const anthropicExecutor: NodeExecutor<
   }
 
   const anthropic = createAnthropic({
-    apiKey: credential.value,
+    apiKey: decrypt(credential.value),
   });
 
   try {

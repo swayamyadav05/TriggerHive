@@ -21,7 +21,6 @@ import {
 import { useAtomValue } from "jotai";
 import { editorAtom } from "../store/atoms";
 
-// TODO: finishing save button work for the workflow state saving
 export const EditorSaveButton = ({
   workflowId,
 }: {
