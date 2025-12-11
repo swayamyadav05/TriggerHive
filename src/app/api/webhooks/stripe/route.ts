@@ -2,6 +2,7 @@ import { sendWorkflowExecution } from "@/inngest/utils";
 import { type NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import Stripe from "stripe";
+import { decrypt } from "@/lib/encryption";
 
 export async function POST(request: NextRequest) {
   try {
@@ -45,6 +46,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    import { CredentialType } from "@/generated/prisma/enums";
+
+    // Get Stripe API secret key from credentials
+    const stripeCredential = await prisma.credential.findFirst({
+      where: {
+        userId: workflow.userId,
+        type: CredentialType.STRIPE,
+      },
+    });
+
+    if (!stripeCredential) {
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Stripe API key not configured. Please add your Stripe API secret key in credentials.",
+        },
+        { status: 401 }
+      );
+    }
+
     // Get raw body and Stripe signature header
     const rawBody = await request.text();
     const signature = request.headers.get("stripe-signature");
@@ -63,7 +85,7 @@ export async function POST(request: NextRequest) {
     let event: Stripe.Event;
 
     try {
-      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+      const stripe = new Stripe(decrypt(stripeCredential.value), {
         apiVersion: "2025-11-17.clover",
       });
 

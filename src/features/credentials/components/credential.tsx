@@ -62,6 +62,11 @@ const credentialTypeOptions = [
     label: "Anthropic",
     logo: "/logo/anthropic.svg",
   },
+  {
+    value: CredentialType.STRIPE,
+    label: "Stripe",
+    logo: "/logo/stripe.svg",
+  },
 ];
 
 interface CredentialFormProps {
