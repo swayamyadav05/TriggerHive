@@ -53,7 +53,7 @@ export function LoginForm() {
         onSuccess: () => {
           router.push("/");
         },
-        onError: () => {
+        onError: (ctx) => {
           toast.error(ctx?.error?.message || "Something went wrong");
         },
       }
@@ -69,7 +69,7 @@ export function LoginForm() {
         onSuccess: () => {
           router.push("/");
         },
-        onError: () => {
+        onError: (ctx) => {
           toast.error(ctx?.error?.message || "Something went wrong");
         },
       }
