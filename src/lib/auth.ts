@@ -3,8 +3,35 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { polar, checkout, portal } from "@polar-sh/better-auth";
 import { polarClient } from "./polar";
+import { Pool } from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-const prisma = new PrismaClient();
+// Define the global type for Prisma
+const globalForPrisma = globalThis as unknown as {
+  prismaAuth: PrismaClient | undefined;
+};
+
+// Get the connection string
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  throw new Error("DATABASE_URL environment variable is not set");
+}
+
+// Function to create a new PrismaClient instance
+function createPrismaClient() {
+  const pool = new Pool({ connectionString });
+  const adapter = new PrismaPg(pool);
+  return new PrismaClient({ adapter });
+}
+
+// Create or reuse PrismaClient instance
+const prisma = globalForPrisma.prismaAuth ?? createPrismaClient();
+
+// In development, save the instance to global to prevent hot-reload issues
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prismaAuth = prisma;
+}
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
