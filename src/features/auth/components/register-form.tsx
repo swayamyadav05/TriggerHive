@@ -60,8 +60,8 @@ export function RegisterForm() {
         onSuccess: () => {
           router.push("/");
         },
-        onError: () => {
-          toast.error("Something went wrong");
+        onError: (ctx) => {
+          toast.error(ctx?.error?.message || "Something went wrong");
         },
       }
     );
@@ -76,8 +76,8 @@ export function RegisterForm() {
         onSuccess: () => {
           router.push("/");
         },
-        onError: () => {
-          toast.error("Something went wrong");
+        onError: (ctx) => {
+          toast.error(ctx?.error?.message || "Something went wrong");
         },
       }
     );
