@@ -31,6 +31,7 @@ import { useCredentialsByType } from "@/features/credentials/hooks/use-credentia
 import { CredentialType } from "@/generated/prisma/enums";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -119,7 +120,7 @@ export const GeminiDialog = ({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className="space-y-8 mt-4">
+            className="space-y-4 mt-2">
             <FormField
               control={form.control}
               name="variableName"
@@ -172,6 +173,14 @@ export const GeminiDialog = ({
                       ))}
                     </SelectContent>
                   </Select>
+                  <p className="text-xs text-muted-foreground">
+                    Add your Gemini{" "}
+                    <Link
+                      href="/credentials"
+                      className="text-primary hover:underline">
+                      Credentials
+                    </Link>
+                  </p>
                   <FormMessage />
                 </FormItem>
               )}
@@ -253,7 +262,7 @@ export const GeminiDialog = ({
                 </FormItem>
               )}
             />
-            <DialogFooter className="mt-4">
+            <DialogFooter className="mt-2">
               <Button type="submit">Save</Button>
             </DialogFooter>
           </form>

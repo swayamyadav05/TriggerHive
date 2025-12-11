@@ -80,6 +80,7 @@ enum CredentialType {
   OPENAI
   GEMINI
   ANTHROPIC
+  STRIPE
 }
 
 model Credential {

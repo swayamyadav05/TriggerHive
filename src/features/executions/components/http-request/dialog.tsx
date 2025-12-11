@@ -105,7 +105,7 @@ export const HttpRequestDialog = ({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className="space-y-8 mt-4">
+            className="space-y-4 mt-2">
             <FormField
               control={form.control}
               name="variableName"
@@ -202,7 +202,7 @@ export const HttpRequestDialog = ({
                 )}
               />
             )}
-            <DialogFooter className="mt-4">
+            <DialogFooter className="mt-2">
               <Button type="submit">Save</Button>
             </DialogFooter>
           </form>

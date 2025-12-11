@@ -10,12 +10,23 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { CopyIcon, SaveIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
 import { useTRPC } from "@/trpc/client";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useCredentialsByType } from "@/features/credentials/hooks/use-credentials";
+import { CredentialType } from "@/generated/prisma/enums";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   open: boolean;
@@ -46,6 +57,10 @@ export const StripeTriggerDialog = ({
   const stripeWebhookSecret = webhookInfo?.stripeWebhookSecret || "";
 
   const [secretInput, setSecretInput] = useState("");
+
+  // Fetch Stripe credentials
+  const { data: credentials, isLoading: isLoadingCredentials } =
+    useCredentialsByType(CredentialType.STRIPE);
 
   const saveSecretMutation = useMutation(
     trpc.workflows.saveStripeWebhookSecret.mutationOptions({
@@ -100,6 +115,46 @@ export const StripeTriggerDialog = ({
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="stripe-credential">Stripe API Key</Label>
+            <Select disabled={isLoadingCredentials}>
+              <SelectTrigger className="w-full">
+                <SelectValue
+                  placeholder={
+                    credentials && credentials.length > 0
+                      ? credentials[0].name
+                      : "No Stripe credentials found"
+                  }
+                />
+              </SelectTrigger>
+              <SelectContent>
+                {credentials?.map((credential) => (
+                  <SelectItem
+                    key={credential.id}
+                    value={credential.id}>
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src={"/logo/stripe.svg"}
+                        alt="Stripe"
+                        width={16}
+                        height={16}
+                      />
+                      {credential.name}
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-muted-foreground">
+              Add your Stripe{" "}
+              <Link
+                href="/credentials"
+                className="text-primary hover:underline">
+                Credentials
+              </Link>
+            </p>
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="webhook-url">Webhook URL</Label>
             <div className="flex gap-2">
