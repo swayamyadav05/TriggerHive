@@ -7,7 +7,7 @@ import {
 } from "@/trpc/init";
 import { z } from "zod";
 import { PAGINATION } from "@/config/constants";
-import { NodeType } from "@/generated/prisma/enums";
+import { NodeType } from "./src/generated/prisma/enums";
 import { Edge, Node } from "@xyflow/react";
 import { sendWorkflowExecution } from "@/inngest/utils";
 import { generateWebhookSecret } from "@/lib/webhook-auth";

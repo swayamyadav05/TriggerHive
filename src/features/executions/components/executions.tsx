@@ -11,8 +11,8 @@ import {
   LoadingView,
 } from "@/components/entity-components";
 import { useSuspenseExecutions } from "../hooks/use-executions";
-import { type Execution } from "@/generated/prisma/client";
-import { ExecutionStatus } from "@/generated/prisma/enums";
+import { type Execution } from "./src/generated/prisma/client";
+import { ExecutionStatus } from "./src/generated/prisma/enums";
 import { formatDistanceToNow } from "date-fns";
 import { useExecutionsParams } from "../hooks/use-executions-params";
 import {

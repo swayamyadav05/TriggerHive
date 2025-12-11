@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import Stripe from "stripe";
 import { decrypt } from "@/lib/encryption";
-import { CredentialType } from "@/generated/prisma/enums";
+import { CredentialType } from "./src/generated/prisma/enums";
 
 export async function POST(request: NextRequest) {
   try {

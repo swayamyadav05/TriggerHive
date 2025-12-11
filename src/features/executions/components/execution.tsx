@@ -13,7 +13,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ExecutionStatus } from "@/generated/prisma/enums";
+import { ExecutionStatus } from "./src/generated/prisma/enums";
 import { formatDistanceToNow } from "date-fns";
 import {
   CheckCircleIcon,
