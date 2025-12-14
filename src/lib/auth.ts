@@ -13,12 +13,14 @@ const polarPluginConfig = process.env.POLAR_ACCESS_TOKEN
           checkout({
             products: [
               {
-                productId: "78b89703-1ea7-4e50-90a7-a487f719378e",
-                slug: "pro",
+                productId: process.env.POLAR_PRODUCT_ID!,
+                slug: process.env.POLAR_SLUG!,
               },
             ],
             successUrl: process.env.POLAR_SUCCESS_URL,
             authenticatedUsersOnly: true,
+
+            returnUrl: process.env.NEXT_PUBLIC_APP,
           }),
           portal(),
         ],
