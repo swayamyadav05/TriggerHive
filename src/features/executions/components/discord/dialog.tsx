@@ -93,98 +93,100 @@ export const DiscordDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] flex flex-col">
         <DialogHeader>
           <DialogTitle>Discord Configuration</DialogTitle>
           <DialogDescription>
             Configure the Discord webhook settings for this node.
           </DialogDescription>
         </DialogHeader>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleSubmit)}
-            className="space-y-4 mt-2">
-            <FormField
-              control={form.control}
-              name="variableName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Variable Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="myDiscord" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Use this name to reference the result in other
-                    nodes: {`{{${watchVariableName}.text}}`}
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="webhookUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Webhook URL</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="https://discord.com/api/webhooks/..."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Get this from Discord: Channel Settings &rarr;
-                    Integrations &rarr; Webhooks
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="content"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Message Content</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Summary: {{myGemini.text}} "
-                      className="min-h-[80px] font-mono text-sm"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    The message to send. Use {"{{variables}}"} for
-                    simple values, {"{{json variable}}"} to stringify
-                    objects, or {'{{get obj "key name"}}'} for
-                    properties with spaces
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Bot Username (Optional)</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Workflow Bot" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Override the webhook&apos;s default username
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <DialogFooter className="mt-2">
-              <Button type="submit">Save</Button>
-            </DialogFooter>
-          </form>
-        </Form>
+        <div className="overflow-y-auto flex-1 px-1">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(handleSubmit)}
+              className="space-y-4 mt-2">
+              <FormField
+                control={form.control}
+                name="variableName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Variable Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="myDiscord" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Use this name to reference the result in other
+                      nodes: {`{{${watchVariableName}.text}}`}
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="webhookUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Webhook URL</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="https://discord.com/api/webhooks/..."
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Get this from Discord: Channel Settings &rarr;
+                      Integrations &rarr; Webhooks
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="content"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Message Content</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Summary: {{myGemini.text}} "
+                        className="min-h-[80px] font-mono text-sm"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      The message to send. Use {"{{variables}}"} for
+                      simple values, {"{{json variable}}"} to
+                      stringify objects, or {'{{get obj "key name"}}'}{" "}
+                      for properties with spaces
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Bot Username (Optional)</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Workflow Bot" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Override the webhook&apos;s default username
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DialogFooter className="mt-2">
+                <Button type="submit">Save</Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </div>
       </DialogContent>
     </Dialog>
   );
