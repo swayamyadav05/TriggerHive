@@ -1,172 +1,116 @@
 # TriggerHive 🐝
 
-> A modern workflow automation platform currently under development
+> **Visual Workflow Automation Platform** — Connect APIs, AI, and services with a drag-and-drop interface
 
-![Status](https://img.shields.io/badge/Status-Work%20in%20Progress-orange?style=flat-square) ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen?style=flat-square)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-## 🚀 About This Project
+<!-- <p align="center">
+  <img src="public/logo/triggerhive-banner.png" alt="TriggerHive Banner" width="800"/>
+</p> -->
 
-I'm building **TriggerHive** - an open-source workflow automation platform similar to [n8n](https://n8n.io/) and [Zapier](https://zapier.com/). This project is currently in active development.
+## ✨ What is TriggerHive?
 
-## 📚 Learning Journey
+**TriggerHive** is an open-source workflow automation platform that lets you visually connect triggers, APIs, AI models, and messaging services. Similar to [n8n](https://n8n.io/), [Zapier](https://zapier.com/), and [Make](https://make.com/), but built with a modern tech stack and fully customizable.
 
-This implementation is part of my learning process, focusing on:
+### 🎬 Demo Workflows
 
-- ✨ Visual workflow builder with drag-and-drop interface
-- 🔗 Multi-service integrations (AI, messaging, webhooks)
-- 🛠 Full-stack TypeScript with modern development practices
-- 💳 SaaS business layer including authentication and payments
-- 🏭 Production-ready architecture with background jobs and error tracking
+| Workflow                       | Description                                                                                             |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| **LinkedIn Post Generator**    | Fetches trending tech articles → AI creates engaging post → Generates hashtags → Posts to Discord/Slack |
+| **Customer Feedback Analyzer** | Google Form submission → AI sentiment analysis → Action items generation → Multi-channel alerts         |
+| **Payment Celebration Engine** | Stripe payment webhook → Fetch customer data → AI personalized thank-you → Team notifications           |
 
-## � Production Ready
-
-- 🐛 **Error Tracking** - Comprehensive monitoring with Sentry + AI insights
-- 🧑‍💻 **Code Quality** - AI-powered PR reviews with CodeRabbit
-- 🗄️ **Scalable Database** - Prisma ORM with Neon Postgres
-- 🎨 **Modern UI** - Beautiful, responsive interface with React Flow
-
-## 🛠 Tech Stack Planned
-
-### Frontend
-
-- **Framework:** Next.js 16 with App Router
-- **UI Library:** React
-- **Language:** TypeScript
-- **Workflow Canvas:** React Flow
-
-### Backend
-
-- **API:** tRPC + Next.js API Routes
-- **Language:** TypeScript
-
-### Infrastructure
-
-- **Database:** PostgreSQL with Prisma ORM, hosted on Neon
-- **Authentication:** Better Auth
-- **Payments:** Polar subscriptions
-- **Background Jobs:** Inngest
-- **Workflow Canvas:** React Flow
-- **Error Tracking:** Sentry
-- **Code Reviews:** CodeRabbit
-- **Deployment:** Vercel
-
-## 🗓 Current Status
-
-### Project Setup
-
-- ✅ Repository initialization and basic project structure
-- ✅ TypeScript + Next.js 16 (App Router) configured
-- ✅ ESLint and code quality tooling
-- ✅ Prisma ORM integrated (client generated to `src/generated/prisma`)
-
-### Core Foundation
-
-- ✅ Database schema and migrations (Prisma) — workflow model and related migrations present
-- ✅ Authentication wired with Better Auth (email/password + Polar plugins)
-- ✅ Payments integration scaffolded with Polar (checkout & portal plugins configured)
-- ✅ tRPC API foundation with a `workflows` router (CRUD endpoints implemented)
-
-### Workflows & Editor
-
-- ✅ Workflow model and CRUD APIs (create, list, get, update name, remove)
-- ✅ **Visual workflow editor with React Flow** - fully functional drag-and-drop canvas
-- ✅ **Node system** - Multiple trigger and action nodes with configuration dialogs
-- ✅ **Real-time execution** - Live workflow execution with Inngest integration
-- ✅ **Node connections** - Visual connection system with data flow
-- ✅ **Workflow execution tracking** - View execution history with detailed outputs
-- ✅ **Variable system** - Template-based variable interpolation (e.g., `{{nodeName.field}}`)
-
-### Trigger Nodes & Webhooks
-
-- ✅ **Google Form Trigger** - Webhook integration with signature verification
-- ✅ **Stripe Trigger** - Native Stripe webhook integration with SDK verification
-- ✅ **Webhook Security** - HMAC-SHA256 signature verification system
-- ✅ **Webhook Management** - Auto-generated webhook URLs per workflow
-- ✅ **Real-time Updates** - Live workflow execution notifications via Inngest channels
-
-### AI, Background Jobs & Observability
-
-- ✅ Inngest integration with workflow execution engine
-- ✅ Multi-channel support (Google Form, Stripe triggers)
-- ✅ **AI Integration** - OpenAI GPT-4, Anthropic Claude, Google Gemini nodes
-- ✅ **Messaging Integration** - Discord and Slack webhook support
-- ✅ **Credentials System** - Secure API key management for third-party services
-- ✅ Sentry integrated for error tracking and telemetry (server + client configs present)
-- ✅ Execution history with pagination, filtering, and detailed output views
-
-### UI & Developer Experience
-
-- ✅ UI component library and many primitives under `src/components/ui/` (inputs, dialogs, navigation, etc.)
-- ✅ tRPC client/server plumbing and auth context (`src/trpc/*`, `src/lib/auth.ts`)
-- ✅ **Node configuration dialogs** - Dynamic forms for each node type
-- ✅ **Workflow sidebar** - App navigation and workflow management
-
-### Summary
-
-TriggerHive now has a comprehensive visual workflow automation platform! Users can create workflows with multiple trigger types (Google Forms, Stripe, Manual), connect them to action nodes (HTTP requests, AI models, messaging services), and execute them with real-time feedback. The platform includes secure credential management, detailed execution history, variable interpolation, and real-time status updates via WebSocket channels. Next focus: expanding integrations (email, databases, file storage), improving error handling, and adding workflow templates.
-
-## ✨ Features
+## 🚀 Features
 
 ### Visual Workflow Builder
 
-- Drag-and-drop node-based editor powered by React Flow
-- Real-time canvas updates and node connections
-- Custom node types with configurable parameters
+- **Drag-and-drop editor** powered by React Flow
+- **Real-time canvas** with live node connections
+- **Node configuration dialogs** with dynamic forms
+- **Variable interpolation** — Pass data between nodes with `{{nodeName.field}}`
 
 ### Trigger Nodes
 
-- **Google Form Trigger** - Receive form submissions via webhooks
-- **Stripe Trigger** - Listen to Stripe payment events (payment_intent.succeeded, etc.)
-- **Manual Trigger** - Execute workflows on-demand
+| Trigger            | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| 📝 **Google Form** | Receive form submissions via secure webhooks              |
+| 💳 **Stripe**      | Listen to payment events (payment_intent.succeeded, etc.) |
+| ▶️ **Manual**      | Execute workflows on-demand                               |
 
 ### Action Nodes
 
-- **HTTP Request** - Make API calls to external services
-- **AI Models** - Generate text with OpenAI, Anthropic Claude, or Google Gemini
-- **Messaging** - Send messages to Discord channels or Slack webhooks
-
-### Webhook System
-
-- Auto-generated unique webhook URLs per workflow
-- Secure signature verification (HMAC-SHA256 for custom webhooks, Stripe SDK for Stripe)
-- Support for multiple trigger types per workflow
+| Node                 | Description                                   |
+| -------------------- | --------------------------------------------- |
+| 🌐 **HTTP Request**  | Make GET/POST/PUT/PATCH/DELETE API calls      |
+| 🤖 **OpenAI**        | Generate text with GPT-4, GPT-4o, GPT-4o-mini |
+| 🧠 **Anthropic**     | Use Claude models for AI processing           |
+| ✨ **Google Gemini** | Access Gemini 2.0 Flash and Pro models        |
+| 💬 **Discord**       | Send messages via webhooks                    |
+| 📢 **Slack**         | Post to Slack channels                        |
 
 ### Execution Engine
 
-- Background job processing with Inngest
-- Real-time execution status updates via WebSocket channels
-- Execution history with detailed logs and output data
-- Variable interpolation system for dynamic data flow between nodes
-- Error handling and stack trace tracking
+- **Background processing** with Inngest
+- **Real-time status updates** via WebSocket channels
+- **Execution history** with detailed logs and output data
+- **Error tracking** with Sentry integration
+- **Secure credential management** for API keys
 
-### Credentials Management
+## 🛠 Tech Stack
 
-- Secure API key storage for third-party integrations
-- Support for OpenAI, Anthropic, and Google Gemini credentials
-- Per-user credential isolation
+### Frontend
 
-## 🏗 Getting Started
+| Technology       | Purpose                         |
+| ---------------- | ------------------------------- |
+| **Next.js 16**   | React framework with App Router |
+| **React 19**     | UI library                      |
+| **TypeScript**   | Type safety                     |
+| **React Flow**   | Visual workflow canvas          |
+| **Tailwind CSS** | Styling                         |
+| **Radix UI**     | Accessible UI primitives        |
+| **shadcn/ui**    | Component library               |
+
+### Backend
+
+| Technology      | Purpose                      |
+| --------------- | ---------------------------- |
+| **tRPC**        | End-to-end typesafe APIs     |
+| **Prisma**      | Database ORM                 |
+| **Inngest**     | Event-driven background jobs |
+| **Better Auth** | Authentication               |
+| **Polar**       | Payments & subscriptions     |
+
+### AI & Integrations
+
+| Technology        | Purpose                    |
+| ----------------- | -------------------------- |
+| **Vercel AI SDK** | Unified AI model interface |
+| **OpenAI**        | GPT models                 |
+| **Anthropic**     | Claude models              |
+| **Google AI**     | Gemini models              |
+| **Handlebars**    | Template interpolation     |
+
+### Infrastructure
+
+| Technology | Purpose             |
+| ---------- | ------------------- |
+| **Neon**   | Serverless Postgres |
+| **Vercel** | Deployment          |
+| **Sentry** | Error tracking      |
+| **Stripe** | Payment webhooks    |
+
+## 📦 Installation
 
 ### Prerequisites
 
-- Node.js 18+ and npm
-- PostgreSQL database (or use Neon)
-- Stripe account (for Stripe triggers)
+- Node.js 18+
+- PostgreSQL database (or [Neon](https://neon.tech))
+- npm or pnpm
 
-### Environment Variables
-
-Create a `.env` file with:
-
-```env
-DATABASE_URL="postgresql://..."
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
-STRIPE_SECRET_KEY="sk_..."
-INNGEST_EVENT_KEY="..."
-INNGEST_SIGNING_KEY="..."
-SENTRY_AUTH_TOKEN="..."
-```
-
-### Installation
+### Quick Start
 
 ```bash
 # Clone the repository
@@ -176,33 +120,212 @@ cd TriggerHive
 # Install dependencies
 npm install
 
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your credentials
+
 # Run database migrations
 npx prisma migrate dev
+
+# Generate Prisma client
+npx prisma generate
 
 # Start development server
 npm run dev
 ```
 
-### Usage
+### Environment Variables
 
-1. Sign up and create your first workflow
-2. Add trigger nodes (Google Form, Stripe, or Manual)
-3. Connect action nodes (HTTP Request, etc.)
-4. Configure each node with the required parameters
-5. For webhook triggers:
-   - Copy the generated webhook URL
-   - Configure it in the external service (Stripe Dashboard, Google Forms, etc.)
-   - Add the signing secret (for Stripe triggers)
-6. Execute your workflow and monitor the results!
+```env
+# Database
+DATABASE_URL="postgresql://..."
+
+# App
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+# Authentication (Better Auth)
+BETTER_AUTH_SECRET="your-secret-key"
+
+# Stripe (for payment triggers)
+STRIPE_SECRET_KEY="sk_..."
+
+# Inngest (background jobs)
+INNGEST_EVENT_KEY="..."
+INNGEST_SIGNING_KEY="..."
+
+# Sentry (error tracking)
+SENTRY_AUTH_TOKEN="..."
+
+# Optional: AI Providers (users add their own keys)
+# These are stored encrypted per-user in the credentials system
+```
+
+### Development Scripts
+
+```bash
+# Start all services (Next.js + Inngest Dev Server)
+npm run dev:all
+
+# Start Next.js only
+npm run dev
+
+# Start Inngest Dev Server
+npm run inngest:dev
+
+# Start ngrok tunnel (for webhooks)
+npm run ngrok:dev
+
+# Build for production
+npm run build
+
+# Run linting
+npm run lint
+```
+
+## 🎯 Usage
+
+### Creating Your First Workflow
+
+1. **Sign up** and create your account
+2. **Create a new workflow** from the dashboard
+3. **Add a trigger node** (Manual, Google Form, or Stripe)
+4. **Connect action nodes** (HTTP Request, AI, Discord, Slack)
+5. **Configure each node** with required parameters
+6. **Execute** and watch real-time status updates!
+
+### Using Variables
+
+Pass data between nodes using Handlebars syntax:
+
+```handlebars
+# Access HTTP response data
+{{nested httpNode "httpResponse.data.title"}}
+
+# Access AI generated text
+{{aiNode.text}}
+
+# Access Google Form responses
+{{response "Question Name"}}
+
+# Access Stripe payment data
+{{stripe.data.amount}}
+
+# Pretty print JSON
+{{json someObject}}
+```
+
+### Webhook Configuration
+
+For **Google Form Trigger**:
+
+1. Open node settings → Copy webhook URL
+2. Copy the generated Apps Script
+3. Paste in Google Forms → Extensions → Apps Script
+4. Add trigger: On form submit
+
+For **Stripe Trigger**:
+
+1. Open node settings → Copy webhook URL
+2. Go to Stripe Dashboard → Webhooks → Add endpoint
+3. Paste URL and select events (e.g., `payment_intent.succeeded`)
+4. Copy signing secret → Paste in TriggerHive
+
+## 📁 Project Structure
+
+```
+TriggerHive/
+├── prisma/                    # Database schema & migrations
+│   └── schema.prisma
+├── public/                    # Static assets
+├── src/
+│   ├── app/                   # Next.js App Router
+│   │   ├── (auth)/           # Auth pages
+│   │   ├── (dashboard)/      # Dashboard pages
+│   │   └── api/              # API routes & webhooks
+│   ├── components/           # UI components
+│   │   ├── ui/              # shadcn/ui primitives
+│   │   └── react-flow/      # Workflow canvas components
+│   ├── features/            # Feature modules
+│   │   ├── auth/            # Authentication
+│   │   ├── credentials/     # API key management
+│   │   ├── editor/          # Workflow editor
+│   │   ├── executions/      # Execution nodes & logic
+│   │   ├── triggers/        # Trigger nodes
+│   │   └── workflows/       # Workflow management
+│   ├── inngest/             # Background job functions
+│   │   ├── channels/        # Real-time channels
+│   │   └── functions.ts     # Workflow executor
+│   ├── lib/                 # Utilities
+│   │   ├── handlebars-helpers.ts  # Template helpers
+│   │   └── encryption.ts    # Credential encryption
+│   └── trpc/               # tRPC router & client
+└── docs/                   # Documentation
+```
+
+## 🔒 Security
+
+- **Credential Encryption** — All API keys stored encrypted (AES-256)
+- **Webhook Verification** — HMAC-SHA256 signature validation
+- **Stripe SDK Verification** — Native Stripe webhook signature verification
+- **Per-user Isolation** — Credentials and workflows scoped to users
+- **Secure Sessions** — Better Auth with HTTP-only cookies
+
+## 🗺 Roadmap
+
+### Completed ✅
+
+- [x] Visual workflow editor with React Flow
+- [x] Multiple trigger types (Manual, Google Form, Stripe)
+- [x] AI integration (OpenAI, Anthropic, Gemini)
+- [x] Messaging nodes (Discord, Slack)
+- [x] HTTP Request node with all methods
+- [x] Real-time execution tracking
+- [x] Execution history with filtering
+- [x] Secure credential management
+- [x] Variable interpolation system
+- [x] Webhook security (HMAC-SHA256)
+
+### Can be added 🚧
+
+- [ ] Email nodes (SendGrid, Resend)
+- [ ] Database nodes (Postgres, MongoDB)
+- [ ] Conditional logic nodes (If/Else, Switch)
+- [ ] Loop nodes (For Each, While)
+- [ ] Workflow templates gallery
+- [ ] Team collaboration features
+- [ ] Workflow versioning
+- [ ] Scheduled triggers (Cron)
+- [ ] File storage nodes (S3, Google Drive)
 
 ## 🤝 Contributing
 
-This is currently a personal project. I'm not accepting contributions at this time, but feel free to **fork** and build your own version!
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [React Flow](https://reactflow.dev/) — Workflow canvas
+- [shadcn/ui](https://ui.shadcn.com/) — Beautiful UI components
+- [Inngest](https://inngest.com/) — Event-driven background jobs
+- [Vercel AI SDK](https://sdk.vercel.ai/) — Unified AI interface
+- [Better Auth](https://better-auth.com/) — Authentication
+- [Polar](https://polar.sh/) — Payments
 
 ---
 
-> This README will be updated as the project progresses. Check back soon for development updates!
+<p align="center">
+  <b>TriggerHive</b> — Automate Everything 🐝
+  <br/>
+  Built with ❤️ by <a href="https://github.com/swayamyadav05">Swayam Yadav</a>
+</p>
 
-**TriggerHive** - Building the future of workflow automation 🐝
-
-Last updated: December 10, 2025
+Last updated: December 20, 2025
